@@ -1,8 +1,5 @@
 const router = require("express").Router();
-const articlesController = require("../../controllers/articlesController");
-
-// Matches with "/api/articles"
-router.route("/").get(articlesController.findAll);
+const articleController = require("../../controllers/articleController");
 
 // Matches with "/api/articles/:id"
 // router
@@ -10,5 +7,11 @@ router.route("/").get(articlesController.findAll);
 //   .get(articlesController.findById)
 //   .put(booksController.update)
 //   .delete(articlesController.remove);
+
+router.route("/saveArticle").post(articleController.save);
+router.route("/getSavedArticles").get(articleController.getSavedArticles);
+router
+  .route("/deleteSavedArticle")
+  .delete(articleController.deleteSavedArticle);
 
 module.exports = router;

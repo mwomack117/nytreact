@@ -1,9 +1,11 @@
-const express = require("express");
-
-const mongoose = require("mongoose");
+const express = require("express"); // Server
+const mongoose = require("mongoose"); // MongoDB ORM
 const routes = require("./routes");
-const app = express();
+
 const PORT = process.env.PORT || 5000;
+
+////////// Initialize Express /////////////
+const app = express();
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -14,7 +16,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 // Add routes, both API and view
-app.use(routes);
+app.use("/api/articles", routes);
 
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/nytreact");
